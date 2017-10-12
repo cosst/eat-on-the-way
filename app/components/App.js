@@ -1,70 +1,29 @@
 import React from 'react';
+import ReactRouter from 'react-router-dom';
+var BrowserRouter = require('react-router-dom').BrowserRouter;
+var Route = require('react-router-dom').Route;
+var Link = require('react-router-dom').Link;
+var Switch = require('react-router-dom').Switch;
 var PropTypes = require('prop-types');
 var api = require('../utils/api');
 
-function BusinessList (props) {
-  // convert meters to concatenated miles
-  function getMiles (distanceInMeters) {
-    return (distanceInMeters*0.000621371192).toFixed(1)
-  }
-  return (
-    <ul className='biz-list'>
-      {props.businesses.map(function (business, index) {
-        return (
-          // use index instead of business.name
-          <li key={business.name} className='biz-item'>
-            <div className='biz-name'>{business.name}</div>
-            <ul className='space-list-items'>
-              <li>
-                <img
-                  className='biz-image'
-                  src={business.image_url}
-                  alt={'Image for ' + business.name} />
-              </li>
-              <li className='left'>{business.rating} stars | ({business.review_count} reviews)</li>
-              <li className='left'>Eating in <span className='green-text'>15 minutes</span></li>
-              <li className='left'>Additional Drive Time: <span className='red-text'>20 minutes</span></li>
-              <li className='left'>Distance: {getMiles (business.distance)} mi</li>
-              <li><a className='button' href={business.url} target='_blank'>
-                        View On Yelp
-                  </a>
-              </li>
-            </ul>
-          </li>
-        )
-      })}
-    </ul>
-  )
-}
-
-BusinessList.propTypes = {
-  businesses: PropTypes.array.isRequired,
-}
+var Home = require('./Home');
+var Results = require('./Results');
 
 class App extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      businesses: null
-    };
-  }
-  componentDidMount () {
-    api.getRestaurants()
-      .then(function (businesses) {
-        this.setState(function () {
-          return {
-            businesses: businesses
-          }
-        })
-      }.bind(this));
-  }
-  render () {
+  render() {
     return (
-      <div>
-        {!this.state.businesses
-          ? <p>LOADING!</p>
-          : <BusinessList businesses={this.state.businesses} />}
-      </div>
+      <BrowserRouter>
+        <div className='container'>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/results' component={Results} />
+            <Route render={function () {
+              return <p>Not Found</p>
+            }} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     )
   }
 }

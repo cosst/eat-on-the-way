@@ -13,10 +13,17 @@ export default {
     publicPath: '/',
     filename: 'bundle.js'
   },
-  
+
+  // devServer: {
+  //   historyApiFallback: true,
+  //   contentBase: './',
+  //   hot: true
+  // },
+
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader'] }
+      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader'] },
+      { test: /\.png$/, loader: "url-loader?mimetype=image/png" }
     ]
   }
 }

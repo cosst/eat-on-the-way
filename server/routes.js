@@ -29,6 +29,9 @@ app.use(express.static(projectRoot + '/public'));
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../app/index.html'));
 });
+app.get('/results', function(req, res) {
+  res.sendFile(path.join(__dirname, '../app/index.html'));
+});
 
 // Yelp API call
 app.get('/cafes', getYelpBusinesses);

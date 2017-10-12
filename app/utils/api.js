@@ -1,7 +1,7 @@
 var axios = require('axios');
 
 module.exports = {
-  getRestaurants: function () {
+  getBusinesses: function () {
     return axios.get('/cafes/')
     .then(function (response) {
       console.log(response.data.jsonBody.businesses);
