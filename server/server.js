@@ -38,7 +38,9 @@ const client = yelp.client(token);
 app.get('/cafes', function(req, res) {
   client.search({
     term: 'cafe',
-    location: '90012'
+    location: '601 E 2nd St, Los Angeles, CA 90012',
+    sort_by: 'rating',
+    open_now: true
   })
   .then(response => res.send(response))
   .catch(e => console.log(e));

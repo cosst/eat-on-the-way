@@ -3,11 +3,26 @@ import React from 'react';
 var api = require('../utils/api');
 
 function BusinessList (props) {
+  // var miles = props.business.distance*0.000621371192;
   return (
-    <ul>
+    <ul className='biz-list'>
       {props.businesses.map(function (business, index) {
         return (
-          <li key={business.name}>{business.name}</li>
+          <li key={business.name} className='biz-item'>
+            <div className='biz-name'>{business.name}</div>
+            <ul className='space-list-items'>
+              <li>
+                <img
+                  className='biz-image'
+                  src={business.image_url}
+                  alt={'Image for ' + business.name} />
+              </li>
+              <li className='left'>{business.rating} stars | ({business.review_count} reviews)</li>
+              <li className='left'>Eating in <span className='green-text'>15 minutes</span></li>
+              <li className='left'>Additional Drive Time: <span className='red-text'>20 minutes</span></li>
+              <li className='left'>Distance: {(business.distance*0.000621371192)}</li>
+            </ul>
+          </li>
         )
       })}
     </ul>
