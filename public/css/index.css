@@ -43,13 +43,13 @@ ul {
     border-radius: 15%;
 }
 
-/*    @media only screen 
-        and (max-device-width: 573px) {
+    @media only screen 
+        and (max-width: 573px) {
             .biz-image {
                 height: 100%;
                 width: 200px;
             }
-        }*/
+        }
 
 .biz-item {
     margin: 15px;
