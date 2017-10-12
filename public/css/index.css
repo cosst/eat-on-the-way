@@ -2,12 +2,40 @@ body {
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: #d0021b;
+}
+
 li {
     list-style-type: none;
 }
 
 ul {
     padding: 0;
+}
+
+.button {
+    color: #fff;
+    background: #D32323;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 120px;
+    text-align: center;
+    display: block;
+    padding: 7px 0;
+    margin: 10px auto;
+}
+
+.button:hover:enabled {
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(1px);
+}
+
+.button:active {
+    transform: translateY(1px);
 }
 
 .biz-image {

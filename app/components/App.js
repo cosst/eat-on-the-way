@@ -21,6 +21,10 @@ function BusinessList (props) {
               <li className='left'>Eating in <span className='green-text'>15 minutes</span></li>
               <li className='left'>Additional Drive Time: <span className='red-text'>20 minutes</span></li>
               <li className='left'>Distance: {(business.distance*0.000621371192)}</li>
+              <li><a className='button' href={business.url} target='_blank'>
+                        View On Yelp
+                  </a>
+              </li>
             </ul>
           </li>
         )
