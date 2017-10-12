@@ -3,10 +3,9 @@ var PropTypes = require('prop-types');
 var api = require('../utils/api');
 
 function BusinessList (props) {
-  // var miles = props.business.distance*0.000621371192;
-  // in UI logic all of that with getMiles (business.distance)
+  // convert meters to concatenated miles
   function getMiles (distanceInMeters) {
-    return (distanceInMeters*3434).toFixed(2)
+    return (distanceInMeters*0.000621371192).toFixed(1)
   }
   return (
     <ul className='biz-list'>
@@ -25,7 +24,7 @@ function BusinessList (props) {
               <li className='left'>{business.rating} stars | ({business.review_count} reviews)</li>
               <li className='left'>Eating in <span className='green-text'>15 minutes</span></li>
               <li className='left'>Additional Drive Time: <span className='red-text'>20 minutes</span></li>
-              <li className='left'>Distance: {((business.distance*0.000621371192).toFixed(2))}</li>
+              <li className='left'>Distance: {getMiles (business.distance)} mi</li>
               <li><a className='button' href={business.url} target='_blank'>
                         View On Yelp
                   </a>
