@@ -9,7 +9,14 @@ class Home extends React.Component {
   render() {
     return (
       <div className='home-container'>
-        <SimpleForm />
+        <div className='address-input'>
+          <h4>Starting Location</h4>
+          <SimpleForm />
+        </div>
+        <div className='address-input'>
+          <h4>Trip Destination</h4>
+          <SimpleForm />
+        </div>
       </div>
     )
   }

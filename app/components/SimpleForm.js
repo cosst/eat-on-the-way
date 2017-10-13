@@ -4,7 +4,7 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 class SimpleForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { address: 'San Francisco, CA' }
+    this.state = { address: '' }
     this.onChange = (address) => this.setState({ address })
   }
 
@@ -19,14 +19,39 @@ class SimpleForm extends React.Component {
 
   render() {
     const inputProps = {
+      type: 'text',
       value: this.state.address,
       onChange: this.onChange,
+      onBlur: () => { console.log('Blur event!'); },
+      onFocus: () => { console.log('Focused!'); },
+      autoFocus: true,
+      placeholder: "Enter Address or Location"
+    }
+    const cssClasses = {
+      root: 'form-group',
+      input: 'form-control',
+      autocompleteContainer: 'autocomplete-container',
+      autocompleteItem: 'autocomplete-item',
+      autocompleteItemActive: 'autocomplete-item-active',
+      googleLogoContainer: 'google-logo-container',
+      googleLogoImage: 'google-logo-image'
     }
 
+    const AutocompleteItem = ({ formattedSuggestion }) => (
+      <div className="Demo__suggestion-item">
+        <i className='fa fa-map-marker Demo__suggestion-icon'/>
+        <strong>{formattedSuggestion.mainText}</strong>{' '}
+        <small className="text-muted">{formattedSuggestion.secondaryText}</small>
+      </div>)
+
     return (
-      <form onSubmit={this.handleFormSubmit}>
-        <PlacesAutocomplete inputProps={inputProps} />
-        <button type="submit">Submit</button>
+      <form onSubmit={this.handleFormSubmit} className='form'>
+        <PlacesAutocomplete
+          autocompleteItem={AutocompleteItem}
+          inputProps={inputProps}
+          classNames={cssClasses}
+            />
+        <button type="submit" className='button'>Confirm</button>
       </form>
     )
   }

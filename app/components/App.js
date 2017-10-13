@@ -8,6 +8,7 @@ var PropTypes = require('prop-types');
 var api = require('../utils/api');
 
 var Home = require('./Home');
+var Header = require('./Header');
 var Results = require('./Results');
 
 class App extends React.Component {
@@ -15,6 +16,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div className='container'>
+          <Header />
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/results' component={Results} />

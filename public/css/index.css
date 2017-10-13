@@ -7,12 +7,38 @@ a {
     color: #d0021b;
 }
 
+h1 {
+    color: #D32323;
+    font-size: 40px;
+}
+
+    @media only screen 
+        and (max-width: 460px) {
+            h1 {
+                font-size: 30px;
+            }
+        }
+h4 {
+    font-size: 16px;
+}
+
 li {
     list-style-type: none;
 }
 
+strong {
+    font-weight: bold;
+}
+
 ul {
     padding: 0;
+}
+
+.address-input {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
 }
 
 .button {
@@ -72,6 +98,14 @@ ul {
     font-weight: bold;
 }
 
+.header-container {
+    text-align: center;
+}
+
+.home-container {
+    display: flex;
+}
+
 li .left {
     text-align: left;
 }
@@ -84,3 +118,63 @@ li .left {
 .space-list-items {
     margin-bottom: 7px;
 }
+
+.form {
+    width: 80%;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-control,
+.form-control:focus,
+.form-control:active {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border: honeydew;
+    display: block;
+    width: 100%;
+    padding: 16px;
+    font-size: 20px;
+    border-radius: 2px;
+    outline: none;
+}
+
+.autocomplete-container {
+    border-bottom: honeydew;
+    border-left: honeydew;
+    border-right: honeydew;
+    border-top: 1px solid #e6e6e6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border-radius: 0 0 2px 2px;
+}
+
+.autocomplete-item {
+
+}
+
+.autocomplete-item-active {
+    background: #e5e5e5;
+}
+
+.google-logo-container {
+    background: #fcfcfc;
+    text-align: right;
+}
+
+.google-logo-image {
+    height: 80%;
+}
+
+.Demo__suggestion-icon {
+  margin-right: 8px;
+}
+
+
+.Demo__suggestion-item {
+  padding: 4px;
+  text-align: left;
+}
+
+
