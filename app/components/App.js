@@ -10,6 +10,7 @@ var api = require('../utils/api');
 var Home = require('./Home');
 var Header = require('./Header');
 var Results = require('./Results');
+var Map = require('./Map');
 
 class App extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/results' component={Results} />
+            <Route path='/map' component={Map} />
             <Route render={function () {
               return <p>Not Found</p>
             }} />

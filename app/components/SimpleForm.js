@@ -5,9 +5,35 @@ class SimpleForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = { address: '' }
-    this.onChange = (address) => this.setState({ address })
+    // this.onChange = (address) => this.setState({ address });
+    this.handleChange = this.handleChange.bind(this)
+    // this.handleChange = this.handleChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // handleChange(event) {
+  //   var value = event.target.value;
+
+  //   this.setState(function () {
+  //     return {
+  //       address: value
+  //     }
+  //   });
+  // }
+
+  handleChange(address) {
+    this.setState({
+      address
+    })
+  }
+
+  handleFormSubmit(event) {
+    event.preventDefault();
+
+    this.props.onSubmit(
+      this.props.address
+    );
+  }
   // handleFormSubmit = (event) => {
   //   event.preventDefault()
 
@@ -21,7 +47,7 @@ class SimpleForm extends React.Component {
     const inputProps = {
       type: 'text',
       value: this.state.address,
-      onChange: this.onChange,
+      onChange: this.handleChange,
       onBlur: () => { console.log('Blur event!'); },
       onFocus: () => { console.log('Focused!'); },
       autoFocus: true,
