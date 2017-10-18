@@ -32,7 +32,7 @@ app.get('/', function(req, res) {
 app.get('/results', function(req, res) {
   res.sendFile(path.join(__dirname, '../app/index.html'));
 });
-app.get('/map', function(req, res) {
+app.get('/maps', function(req, res) {
   res.sendFile(path.join(__dirname, '../app/index.html'));
 });
 

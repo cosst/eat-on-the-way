@@ -3,12 +3,16 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 
 class SimpleForm extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { address: '' }
-    // this.onChange = (address) => this.setState({ address });
-    this.handleChange = this.handleChange.bind(this)
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
+    super(props);
+    this.state = { 
+      address: '',
+      geocodeResults: null
+    };
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.renderGeocodeFailure = this.renderGeocodeFailure.bind(this);
+    this.renderGeocodeSuccess = this.renderGeocodeSuccess.bind(this);
+    // this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   // handleChange(event) {
@@ -21,21 +25,66 @@ class SimpleForm extends React.Component {
   //   });
   // }
 
+  // handleFormSubmit(event) {
+  //   event.preventDefault();
+
+  //   this.props.onSubmit(
+  //     this.props.address
+  //   );
+  // }
+
+  handleSelect(address) {
+    this.setState({
+      address
+    })
+
+    geocodeByAddress(address)
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        console.log('Success Yay', { lat, lng })
+        this.setState({
+          geocodeResults: this.renderGeocodeSuccess(lat, lng),
+          loading: false
+        })
+      })
+      .catch((error) => {
+        console.log('Oh no!', error)
+        this.setState({
+          geocodeResults: this.renderGeocodeFailure(error),
+          loading: false
+        })
+      })
+  }
+
   handleChange(address) {
     this.setState({
       address
     })
   }
 
-  handleFormSubmit(event) {
-    event.preventDefault();
-
-    this.props.onSubmit(
-      this.props.address
-    );
+  renderGeocodeFailure(err) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        <strong>Error!</strong> {err}
+      </div>
+    )
   }
-  // handleFormSubmit = (event) => {
-  //   event.preventDefault()
+
+  renderGeocodeSuccess(lat, lng) {
+    return (
+      <div className="alert alert-success" role="alert">
+        <strong>Success!</strong> Geocoder found latitude and longitude: <strong>{lat}, {lng}</strong>
+      </div>
+    )
+  }
+
+  // handleFormSubmit(event) {
+  //   event.preventDefault();
+
+  //     this.state.onSubmit(
+  //       this.state.address,
+  //       this.props.address
+  //     );
 
   //   geocodeByAddress(this.state.address)
   //     .then(results => getLatLng(results[0]))
@@ -71,14 +120,17 @@ class SimpleForm extends React.Component {
       </div>)
 
     return (
-      <form onSubmit={this.handleFormSubmit} className='form'>
+      // <form onSubmit={this.handleFormSubmit} className='form'>
+        <div>
         <PlacesAutocomplete
+          onSelect={this.handleSelect}
           autocompleteItem={AutocompleteItem}
           inputProps={inputProps}
           classNames={cssClasses}
             />
         <button type="submit" className='button'>Confirm</button>
-      </form>
+        </div>
+      // </form>
     )
   }
 }
