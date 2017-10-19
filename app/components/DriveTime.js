@@ -45,9 +45,7 @@ class DriveTime extends React.Component {
 
   render() {
     return(
-      <div>
-        <p>Drive Time: {this.state.duration}</p>
-      </div>
+        <span>{this.state.duration}</span>
     );
   }
 }

@@ -228,7 +228,7 @@ class Home extends React.Component {
           </div>
           {originAddress && destinationAddress &&
             <div className='drive-time'>
-              <DriveTime
+              Drive Time: <DriveTime
                 origin={this.state.originAddress}
                 destination={this.state.destinationAddress}
                />
