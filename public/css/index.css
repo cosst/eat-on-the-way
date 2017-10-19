@@ -38,7 +38,12 @@ ul {
     display: flex;
     flex-direction: column;
     width: 50%;
+    height: 380px;
     align-items: center;
+}
+
+.address-preview {
+    margin: 15px 0px 10px 0px;
 }
 
 .button {
@@ -122,6 +127,12 @@ li .left {
 .red-text {
     color: red;
     font-weight: bold;
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
 }
 
 .space-list-items {

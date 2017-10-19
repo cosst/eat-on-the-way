@@ -19,12 +19,15 @@ class Maps extends React.Component {
                 isMarkerShown
                 googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyC5sVlO2j-O0C5WbH6_hOBa0GpRVPHioq0&libraries=geometry,drawing,places"
                 loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `250px`, width: `250px` }} />}
+                containerElement={<div style={{ height: `250px`, width: `250px`, margin: `0 auto` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
                 name={this.props.name}
                 lat={this.props.lat}
                 lng={this.props.lng}
               />
+            </div>
+            <div className='address-preview'>
+              {this.props.name}
             </div>
           </div>
         )

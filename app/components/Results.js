@@ -45,11 +45,12 @@ class Results extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      address: props.address,
       businesses: null
     };
   }
   componentDidMount () {
-    api.getBusinesses()
+    api.getBusinesses(this.props.address)
       .then(function (businesses) {
         this.setState(function () {
           return {

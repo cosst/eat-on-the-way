@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 // var SimpleForm = require('./SimpleForm');
 var Maps = require('./Maps');
+var Results = require('./Results');
 
 class SimpleForm extends React.Component {
   constructor(props) {
@@ -137,11 +138,13 @@ class Home extends React.Component {
       originLat: null,
       originLng: null,
       destinationLat: null,
-      destinationLng: null
+      destinationLng: null,
+      showResults: false
     };
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.handleResultsSubmit = this.handleResultsSubmit.bind(this);
   }
 
   handleFormSubmit(id, address, lat, lng) {
@@ -162,6 +165,12 @@ class Home extends React.Component {
     });
   }
 
+  handleResultsSubmit() {
+    this.setState({
+      showResults: true
+    });
+  }
+
   render() {
     var originAddress = this.state.originAddress;
     var destinationAddress = this.state.destinationAddress;
@@ -169,46 +178,67 @@ class Home extends React.Component {
     var originLng = this.state.originLng;
     var destinationLat = this.state.destinationLat;
     var destinationLng = this.state.destinationLng;
+    var showResults = this.state.showResults;
 
     return (
-      <div className='home-container'>
-        <div className='address-input'>
-          <h4>Starting Location</h4>
-            {!originAddress &&
-              <SimpleForm
-                id='origin'
-                onSubmit={this.handleFormSubmit}
-              />
-            }
-            {originAddress !== '' &&
-              <div><Maps
-                name={this.state.originAddress}
-                lat={this.state.originLat}
-                lng={this.state.originLng}
-              />
-              <button
-                className='reset'
-                onClick={this.handleReset.bind(null, 'origin')}>
-                  Reset
-              </button></div>
-            }
+        <div><div className='row'>
+          <div className='address-input'>
+            <h4>Starting Location</h4>
+              {!originAddress &&
+                <SimpleForm
+                  id='origin'
+                  onSubmit={this.handleFormSubmit}
+                />
+              }
+              {originAddress !== '' &&
+                <div><Maps
+                  name={this.state.originAddress}
+                  lat={this.state.originLat}
+                  lng={this.state.originLng}
+                />
+                <button
+                  className='reset'
+                  onClick={this.handleReset.bind(null, 'origin')}>
+                    Reset
+                </button></div>
+              }
+          </div>
+          <div className='address-input'>
+            <h4>Trip Destination</h4>
+              {!destinationAddress &&
+                <SimpleForm
+                  id='destination'
+                  onSubmit={this.handleFormSubmit}
+                />}
+              {destinationAddress !== '' &&
+                <div><Maps
+                  name={this.state.destinationAddress}
+                  lat={this.state.destinationLat}
+                  lng={this.state.destinationLng}
+                />
+                <button
+                  className='reset'
+                  onClick={this.handleReset.bind(null, 'destination')}>
+                    Reset
+                </button></div>
+              }
+          </div>
+          {showResults === false && originAddress && destinationAddress &&
+            <button
+              className='button'
+              onClick={this.handleResultsSubmit}
+            >
+              Find Eats
+            </button>
+          }
         </div>
-        <div className='address-input'>
-          <h4>Trip Destination</h4>
-            {!destinationAddress &&
-              <SimpleForm
-                id='destination'
-                onSubmit={this.handleFormSubmit}
-              />}
-            {destinationAddress !== '' &&
-              <Maps
-                name={this.state.destinationAddress}
-                lat={this.state.destinationLat}
-                lng={this.state.destinationLng}
-              />
-            }
-        </div>
-      </div>
+        <div>
+          {showResults !== false &&
+            <Results
+              address={this.state.originAddress}
+            />
+          }
+        </div></div>
     )
   }
 }
