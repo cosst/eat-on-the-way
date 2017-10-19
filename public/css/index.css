@@ -52,6 +52,7 @@ ul {
     display: block;
     padding: 7px 0;
     margin: 10px auto;
+    cursor: pointer;
 }
 
 .button:hover:enabled {
@@ -62,6 +63,11 @@ ul {
 
 .button:active {
     transform: translateY(1px);
+}
+
+.button:disabled {
+    background: lightgrey;
+    cursor: default;
 }
 
 .biz-image {
@@ -110,6 +116,9 @@ li .left {
     text-align: left;
 }
 
+.map {
+    text-align: center;
+}
 .red-text {
     color: red;
     font-weight: bold;
@@ -168,13 +177,23 @@ li .left {
 }
 
 .Demo__suggestion-icon {
-  margin-right: 8px;
+    margin-right: 8px;
 }
 
 
 .Demo__suggestion-item {
-  padding: 4px;
-  text-align: left;
+    padding: 4px;
+    text-align: left;
+}
+
+.reset {
+    border: none;
+    background: transparent;
+    color: #d0021b;
+    display: block;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
 }
 
 

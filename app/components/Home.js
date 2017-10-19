@@ -115,7 +115,7 @@ class SimpleForm extends React.Component {
           {!this.state.loading && this.state.geocodeResults ?
             <div className='geocoding-results'>{this.state.geocodeResults}</div> :
           null}
-        <button type="submit" className='button'>Confirm</button>
+        <button type="submit" className='button' disabled={!this.state.address}>Confirm</button>
         </div>
       </form>
     )
@@ -141,6 +141,7 @@ class Home extends React.Component {
     };
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   handleFormSubmit(id, address, lat, lng) {
@@ -150,6 +151,14 @@ class Home extends React.Component {
       newState[id + 'Lat'] = lat;
       newState[id + 'Lng'] = lng;
       return newState;
+    });
+  }
+
+  handleReset(id) {
+    this.setState({
+      [id + 'Address']: '',
+      [id + 'Lat']: null,
+      [id + 'Lng']: null
     });
   }
 
@@ -172,11 +181,16 @@ class Home extends React.Component {
               />
             }
             {originAddress !== '' &&
-              <Maps
+              <div><Maps
                 name={this.state.originAddress}
                 lat={this.state.originLat}
                 lng={this.state.originLng}
               />
+              <button
+                className='reset'
+                onClick={this.handleReset.bind(null, 'origin')}>
+                  Reset
+              </button></div>
             }
         </div>
         <div className='address-input'>
