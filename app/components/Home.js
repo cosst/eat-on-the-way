@@ -4,14 +4,6 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 // var SimpleForm = require('./SimpleForm');
 var Maps = require('./Maps');
 
-function AddressPreview (props) {
-  return (
-    <div>
-      {props.value}
-    </div>
-  )
-}
-
 class SimpleForm extends React.Component {
   constructor(props) {
     super(props);
@@ -31,16 +23,54 @@ class SimpleForm extends React.Component {
 
   handleSelect(address) {
     this.setState({
-      address
+      address,
+      loading: true
     })
-  }
+
+    geocodeByAddress(address)
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        console.log('Success Yay', { lat, lng })
+        this.setState({
+          geocodeResults: this.renderGeocodeSuccess(lat, lng),
+          lat: lat,
+          lng: lng,
+          loading: false
+        })
+      })
+      .catch((error) => {
+        console.log('Oh no!', error)
+        this.setState({
+          geocodeResults: this.renderGeocodeFailure(error),
+          loading: false
+        })
+      })
+    }
 
   handleFormSubmit(event) {
     event.preventDefault();
 
     this.props.onSubmit(
       this.props.id,
-      this.state.address
+      this.state.address,
+      this.state.lat,
+      this.state.lng
+    )
+  }
+
+  renderGeocodeFailure(err) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        <strong>Error!</strong> {err}
+      </div>
+    )
+  }
+
+  renderGeocodeSuccess(lat, lng) {
+    return (
+      <div className="alert alert-success" role="alert">
+        <strong>Success!</strong> Geocoder found latitude and longitude: <strong>{lat}, {lng}</strong>
+      </div>
     )
   }
 
@@ -81,6 +111,10 @@ class SimpleForm extends React.Component {
           inputProps={inputProps}
           classNames={cssClasses}
             />
+          {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}
+          {!this.state.loading && this.state.geocodeResults ?
+            <div className='geocoding-results'>{this.state.geocodeResults}</div> :
+          null}
         <button type="submit" className='button'>Confirm</button>
         </div>
       </form>
@@ -99,16 +133,22 @@ class Home extends React.Component {
 
     this.state = {
       originAddress: '',
-      destinationAddress: ''
+      destinationAddress: '',
+      originLat: null,
+      originLng: null,
+      destinationLat: null,
+      destinationLng: null
     };
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  handleFormSubmit(id, address) {
+  handleFormSubmit(id, address, lat, lng) {
     this.setState(function () {
       var newState = {};
       newState[id + 'Address'] = address;
+      newState[id + 'Lat'] = lat;
+      newState[id + 'Lng'] = lng;
       return newState;
     });
   }
@@ -116,6 +156,10 @@ class Home extends React.Component {
   render() {
     var originAddress = this.state.originAddress;
     var destinationAddress = this.state.destinationAddress;
+    var originLat = this.state.originLat;
+    var originLng = this.state.originLng;
+    var destinationLat = this.state.destinationLat;
+    var destinationLng = this.state.destinationLng;
 
     return (
       <div className='home-container'>
@@ -125,8 +169,15 @@ class Home extends React.Component {
               <SimpleForm
                 id='origin'
                 onSubmit={this.handleFormSubmit}
-              />}
-            <Maps />
+              />
+            }
+            {originAddress !== '' &&
+              <Maps
+                name={this.state.originAddress}
+                lat={this.state.originLat}
+                lng={this.state.originLng}
+              />
+            }
         </div>
         <div className='address-input'>
           <h4>Trip Destination</h4>
@@ -135,7 +186,13 @@ class Home extends React.Component {
                 id='destination'
                 onSubmit={this.handleFormSubmit}
               />}
-            <Maps />
+            {destinationAddress !== '' &&
+              <Maps
+                name={this.state.destinationAddress}
+                lat={this.state.destinationLat}
+                lng={this.state.destinationLng}
+              />
+            }
         </div>
       </div>
     )
