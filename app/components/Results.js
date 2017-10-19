@@ -10,6 +10,8 @@ function BusinessList (props) {
   return (
     <ul className='biz-list'>
       {props.businesses.map(function (business, index) {
+      // format display address
+      var businessAddress = business.location.display_address[0] + ', ' + business.location.display_address[1];
         return (
           // use index instead of business.name
           <li key={business.name} className='biz-item'>
@@ -22,6 +24,7 @@ function BusinessList (props) {
                   alt={'Image for ' + business.name} />
               </li>
               <li className='left'>{business.rating} stars | ({business.review_count} reviews)</li>
+              <li className='left'>{businessAddress}</li>
               <li className='left'>Eating in <span className='green-text'>15 minutes</span></li>
               <li className='left'>Additional Drive Time: <span className='red-text'>20 minutes</span></li>
               <li className='left'>Distance: {getMiles (business.distance)} mi</li>

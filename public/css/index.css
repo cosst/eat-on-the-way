@@ -104,6 +104,13 @@ ul {
     font-weight: bold;
 }
 
+.drive-time {
+    text-align: center;
+    margin: 15px auto 5px;
+    width: 100%;
+    font-weight: bold;
+}
+
 .green-text {
     color: springgreen;
     font-weight: bold;

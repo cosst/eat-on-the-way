@@ -11,6 +11,7 @@ var Home = require('./Home');
 var Header = require('./Header');
 var Results = require('./Results');
 var Maps = require('./Maps');
+var DriveTime = require('./DriveTime');
 
 class App extends React.Component {
   render() {
@@ -22,6 +23,7 @@ class App extends React.Component {
             <Route exact path='/' component={Home} />
             <Route path='/results' component={Results} />
             <Route path='/maps' component={Maps} />
+            <Route path='/drive-time' component={DriveTime} />
             <Route render={function () {
               return <p>Not Found</p>
             }} />

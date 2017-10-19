@@ -35,6 +35,9 @@ app.get('/results', function(req, res) {
 app.get('/maps', function(req, res) {
   res.sendFile(path.join(__dirname, '../app/index.html'));
 });
+app.get('/drive-time', function(req, res) {
+  res.sendFile(path.join(__dirname, '../app/index.html'));
+});
 
 // Yelp API call
 app.get('/cafes', getYelpBusinesses);

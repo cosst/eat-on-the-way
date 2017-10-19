@@ -8,8 +8,9 @@ const client = yelp.client(token);
 function getYelpBusinesses (req, res) {
   var address = req.query.address;
   client.search({
-    term: 'cafe',
+    categories: 'restaurants, All',
     location: address,
+    limit: 10,
     sort_by: 'rating',
     open_now: true
   })

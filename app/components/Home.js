@@ -4,6 +4,7 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 // var SimpleForm = require('./SimpleForm');
 var Maps = require('./Maps');
 var Results = require('./Results');
+var DriveTime = require('./DriveTime');
 
 class SimpleForm extends React.Component {
   constructor(props) {
@@ -106,17 +107,19 @@ class SimpleForm extends React.Component {
     return (
       <form onSubmit={this.handleFormSubmit} className='form'>
         <div>
-        <PlacesAutocomplete
-          onSelect={this.handleSelect}
-          autocompleteItem={AutocompleteItem}
-          inputProps={inputProps}
-          classNames={cssClasses}
-            />
-          {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}
-          {!this.state.loading && this.state.geocodeResults ?
-            <div className='geocoding-results'>{this.state.geocodeResults}</div> :
-          null}
-        <button type="submit" className='button' disabled={!this.state.address}>Confirm</button>
+          <PlacesAutocomplete
+            onSelect={this.handleSelect}
+            autocompleteItem={AutocompleteItem}
+            inputProps={inputProps}
+            classNames={cssClasses}
+          />
+            {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}
+            {!this.state.loading && this.state.geocodeResults ?
+              <div className='geocoding-results'>{this.state.geocodeResults}</div> :
+            null}
+            {!this.state.loading && this.state.geocodeResults &&
+          <button type="submit" className='button' disabled={!this.state.address}>Confirm</button>
+            }
         </div>
       </form>
     )
@@ -223,6 +226,14 @@ class Home extends React.Component {
                 </button></div>
               }
           </div>
+          {originAddress && destinationAddress &&
+            <div className='drive-time'>
+              <DriveTime
+                origin={this.state.originAddress}
+                destination={this.state.destinationAddress}
+               />
+            </div>
+          }
           {showResults === false && originAddress && destinationAddress &&
             <button
               className='button'
