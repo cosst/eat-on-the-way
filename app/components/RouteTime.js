@@ -28,7 +28,6 @@ class RouteTime extends React.Component {
   }
   
   renderDetails(res, status) {
-    console.log(res);
     // If the request was successfull, fill our state with the distance data.
     if (status == 'OK') {
       this.setState({
