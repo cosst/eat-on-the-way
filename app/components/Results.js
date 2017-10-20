@@ -8,6 +8,7 @@ function BusinessList (props) {
   function getMiles (distanceInMeters) {
     return (distanceInMeters*0.000621371192).toFixed(1)
   }
+  var origin = props.address;
   return (
     <ul className='biz-list'>
       {props.businesses.map(function (business, index) {
@@ -32,7 +33,7 @@ function BusinessList (props) {
               <li className='left'>{businessAddress}</li>
               <li className='left'>Eating in <span className='green-text'>
                   <DriveTime
-                    origin='601 E 2nd St, Los Angeles, CA, United States'
+                    origin={origin}
                     destination={businessAddress}
                   />
                 </span></li>
