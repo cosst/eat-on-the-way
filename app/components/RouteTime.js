@@ -1,13 +1,12 @@
 import React from 'react';
 import api from '../utils/api';
 
-class DriveTime extends React.Component {
+class RouteTime extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       origin: this.props.origin,
       destination: this.props.destination,
-      distance: '',
       duration: ''
     };
   }
@@ -35,7 +34,6 @@ class DriveTime extends React.Component {
       this.setState({
         origin: res.originAddresses[0],
         destination: res.destinationAddresses[0],
-        distance: res.rows[0].elements[0].distance.text,
         duration: res.rows[0].elements[0].duration.text
       });
     } else {
@@ -50,4 +48,4 @@ class DriveTime extends React.Component {
   }
 }
 
-module.exports = DriveTime;
+module.exports = RouteTime;

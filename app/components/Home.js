@@ -4,7 +4,7 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 // var SimpleForm = require('./SimpleForm');
 var Maps = require('./Maps');
 var Results = require('./Results');
-var DriveTime = require('./DriveTime');
+var RouteTime = require('./RouteTime');
 
 class SimpleForm extends React.Component {
   constructor(props) {
@@ -228,7 +228,7 @@ class Home extends React.Component {
           </div>
           {originAddress && destinationAddress &&
             <div className='drive-time'>
-              Drive Time: <DriveTime
+              Drive Time: <RouteTime
                 origin={this.state.originAddress}
                 destination={this.state.destinationAddress}
                />
@@ -244,9 +244,10 @@ class Home extends React.Component {
           }
         </div>
         <div>
-          {showResults !== false &&
+          {showResults !== false && originAddress !== '' && destinationAddress !== '' &&
             <Results
-              address={this.state.originAddress}
+              originAddress={this.state.originAddress}
+              destinationAddress={this.state.destinationAddress}
             />
           }
         </div></div>
