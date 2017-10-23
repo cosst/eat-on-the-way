@@ -136,6 +136,11 @@ li .left {
     text-align: left;
 }
 
+.loading {
+    text-align: center;
+    font-size: 30px;
+}
+
 .map {
     text-align: center;
 }

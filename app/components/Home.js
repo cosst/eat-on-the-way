@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-// var SimpleForm = require('./SimpleForm');
 var Maps = require('./Maps');
 var Results = require('./Results');
 var RouteTime = require('./RouteTime');
 
-class SimpleForm extends React.Component {
+class AddressInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -83,7 +82,8 @@ class SimpleForm extends React.Component {
       onChange: this.handleChange,
       onBlur: () => { console.log('Blur event!'); },
       onFocus: () => { console.log('Focused!'); },
-      autoFocus: true,
+      // need to figure out how to just set autoFocus on first form input
+      // autoFocus: true,
       placeholder: "Enter Address or Location",
       id: 'address'
     }
@@ -126,7 +126,7 @@ class SimpleForm extends React.Component {
   }
 }
 
-SimpleForm.propTypes = {
+AddressInput.propTypes = {
   id: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired
 }
@@ -188,7 +188,7 @@ class Home extends React.Component {
           <div className='address-input'>
             <h4>Starting Location</h4>
               {!originAddress &&
-                <SimpleForm
+                <AddressInput
                   id='origin'
                   onSubmit={this.handleFormSubmit}
                 />
@@ -209,7 +209,7 @@ class Home extends React.Component {
           <div className='address-input'>
             <h4>Trip Destination</h4>
               {!destinationAddress &&
-                <SimpleForm
+                <AddressInput
                   id='destination'
                   onSubmit={this.handleFormSubmit}
                 />}

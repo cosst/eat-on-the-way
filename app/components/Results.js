@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import api from '../utils/api';
+import Loading from './Loading';
 
+// calculates additional driving time to each food option given origin and destination address
 class AddedTime extends React.Component {
   constructor (props) {
     super(props);
@@ -16,14 +18,13 @@ class AddedTime extends React.Component {
   }
 
   componentDidMount() {
-    // Some sample data plus a helper for the DistanceMatrixService.
     const originAddress = this.state.originAddress;
     const eatAddress = this.state.eatAddress;
     const destinationAddress = this.state.destinationAddress;
 
     const matrix = new google.maps.DistanceMatrixService();
 
-    // Get distance from Google API, if server responds, call renderDetails().
+    // using eatAddress in both origins and destinations to get all trip leg times
     matrix.getDistanceMatrix({
         origins: [originAddress, eatAddress],
         destinations: [eatAddress, destinationAddress],
@@ -34,7 +35,7 @@ class AddedTime extends React.Component {
   }
   
   renderDetails(res, status) {
-    // If the request was successfull, fill our state with the distance data.
+    // if request was successful, pulling necessary duration data
     if (status == 'OK') {
       this.setState({
         originAddress: res.originAddresses[0],
@@ -52,10 +53,6 @@ class AddedTime extends React.Component {
   render() {
     var additionalTime = (this.state.finalLegDuration + this.state.toEatDuration) - this.state.routeDuration;
     var seconds = additionalTime;
-    // console.log(additionalTime);
-    // console.log(hours);
-    // console.log(this.finalLegDuration);
-    // console.log(this.state.finalLegDuration);
     var hours = Math.floor(additionalTime/3600);
     var minutes = Math.floor((seconds - (hours*3600))/60);
     return(
@@ -69,6 +66,7 @@ class AddedTime extends React.Component {
   }
 }
 
+// calculates drive time to each restaurant option
 class ArriveTime extends React.Component {
   constructor(props) {
     super(props);
@@ -80,12 +78,10 @@ class ArriveTime extends React.Component {
   }
 
   componentDidMount() {
-    // Some sample data plus a helper for the DistanceMatrixService.
     const origin = this.state.origin;
     const destination = this.state.destination;
     const matrix = new google.maps.DistanceMatrixService();
 
-    // Get distance from Google API, if server responds, call renderDetails().
     matrix.getDistanceMatrix({
         origins: [origin],
         destinations: [destination],
@@ -96,7 +92,6 @@ class ArriveTime extends React.Component {
   }
   
   renderDetails(res, status) {
-    // If the request was successfull, fill our state with the distance data.
     if (status == 'OK') {
       this.setState({
         origin: res.originAddresses[0],
@@ -130,10 +125,8 @@ function BusinessList (props) {
       var address2 = business.location.display_address[1];
       var address3 = business.location.display_address[2];
       var eatAddress = [address1, address2, address3].filter(val => val).join(', ');
-      // var businessAddress = business.location.display_address[0] + ', ' + business.location.display_address[1] + ', ' + business.location.display_address[2];
         return (
-          // use index instead of business.name
-          <li key={business.name} className='biz-item'>
+          <li key={index} className='biz-item'>
             <div className='biz-name'>{business.name}</div>
             <ul className='space-list-items'>
               <li>
@@ -197,7 +190,7 @@ class Results extends React.Component {
     return (
       <div>
         {!this.state.businesses
-          ? <p>LOADING!</p>
+          ? <Loading />
           : <BusinessList
               businesses={this.state.businesses}
               originAddress={this.state.originAddress}
