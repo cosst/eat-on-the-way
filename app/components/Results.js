@@ -56,12 +56,21 @@ class AddedTime extends React.Component {
     var hours = Math.floor(additionalTime/3600);
     var minutes = Math.floor((seconds - (hours*3600))/60);
     return(
-        <span>
-          {hours === 0 && minutes !== 0
-            ? <span>{minutes} mins</span> 
-            : <span>{hours} hrs {minutes} mins</span>
-          }
-        </span>
+      <span>
+        {hours === 0 && minutes !== 0
+          ? (minutes < 10
+              ? <span className='time-green'> {minutes} mins</span>
+              : (minutes > 20
+                  ? <span className='time-red'> {minutes} mins</span>
+                  : <span className='time-orange'> {minutes} mins</span>
+                )
+            )
+          : (hours === 0 && minutes === 0
+              ? <span className='time-green'> no time added</span>
+              : <span className='time-red'> {hours} hrs {minutes} mins</span>
+            )
+        }
+      </span>
     );
   }
 }
@@ -73,7 +82,8 @@ class ArriveTime extends React.Component {
     this.state = {
       origin: this.props.originAddress,
       destination: this.props.eatAddress,
-      duration: ''
+      duration: '',
+      durationNumber: null
     };
   }
 
@@ -96,7 +106,8 @@ class ArriveTime extends React.Component {
       this.setState({
         origin: res.originAddresses[0],
         destination: res.destinationAddresses[0],
-        duration: res.rows[0].elements[0].duration.text
+        duration: res.rows[0].elements[0].duration.text,
+        durationNumber: res.rows[0].elements[0].duration.value
       });
     } else {
       console.log(status);
@@ -104,8 +115,17 @@ class ArriveTime extends React.Component {
   }
 
   render() {
+    var durationNumber = this.state.durationNumber;
     return(
-        <span>{this.state.duration}</span>
+      <span>
+        {durationNumber < 600
+          ? <span className='time-green'>{this.state.duration}</span>
+          : (durationNumber < 1200
+            ? <span className='time-orange'>{this.state.duration}</span>
+            : <span className='time-red'>{this.state.duration}</span>
+            )
+        }
+      </span>
     );
   }
 }
@@ -143,13 +163,13 @@ function BusinessList (props) {
                     eatAddress={eatAddress}
                   />
                 </span></li>
-              <li className='left'>Additional Drive Time: <span className='red-text'>
+              <li className='left'>Additional Drive Time: 
                   <AddedTime
                     originAddress={originAddress}
                     eatAddress={eatAddress}
                     destinationAddress={destinationAddress}
                   />
-              </span></li>
+              </li>
               <li className='left'>Distance: {getMiles (business.distance)} mi</li>
               <li><a className='button' href={business.url} target='_blank'>
                         View On Yelp

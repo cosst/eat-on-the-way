@@ -159,6 +159,21 @@ li .left {
     margin-bottom: 7px;
 }
 
+.time-green {
+    color: springgreen;
+    font-weight: bold;
+}
+
+.time-orange {
+    color: #ff8000;
+    font-weight: bold;
+}
+
+.time-red {
+    color: red;
+    font-weight: bold;
+}
+
 .form {
     width: 80%;
 }
