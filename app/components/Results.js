@@ -164,11 +164,7 @@ function BusinessList (props) {
                   />
                 </span></li>
               <li className='left'>Additional Drive Time: 
-                  <AddedTime
-                    originAddress={originAddress}
-                    eatAddress={eatAddress}
-                    destinationAddress={destinationAddress}
-                  />
+                {business.additionalTime}
               </li>
               <li className='left'>Distance: {getMiles (business.distance)} mi</li>
               <li><a className='button' href={business.url} target='_blank'>
@@ -197,7 +193,7 @@ class Results extends React.Component {
     };
   }
   componentDidMount () {
-    api.getBusinesses(this.props.originAddress)
+    api.getBusinesses(this.props.originAddress, this.props.destinationAddress)
       .then(function (businesses) {
         this.setState(function () {
           return {
