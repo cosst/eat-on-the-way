@@ -15,6 +15,7 @@ function getYelpBusinesses (req, res) {
     open_now: true
   })
   .then(response => res.send(response))
+  // (in the then clause above) turn above into function that takes in response and modifies response to only returns key value pairs that I want
   .catch(e => console.log(e));
 };
 

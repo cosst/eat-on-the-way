@@ -119,11 +119,6 @@ ul {
     font-weight: bold;
 }
 
-.green-text {
-    color: springgreen;
-    font-weight: bold;
-}
-
 .header-container {
     text-align: center;
 }
@@ -143,10 +138,6 @@ li .left {
 
 .map {
     text-align: center;
-}
-.red-text {
-    color: red;
-    font-weight: bold;
 }
 
 .row {
