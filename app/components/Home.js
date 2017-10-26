@@ -9,7 +9,7 @@ class AddressInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      address: ''
+      address: '',
     };
     this.handleChange = this.handleChange.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -80,10 +80,10 @@ class AddressInput extends React.Component {
       type: 'text',
       value: this.state.address,
       onChange: this.handleChange,
-      onBlur: () => { console.log('Blur event!'); },
-      onFocus: () => { console.log('Focused!'); },
+      // onBlur: () => { console.log('Blur event!'); },
+      // onFocus: () => { console.log('Focused!'); },
       // need to figure out how to just set autoFocus on first form input
-      // autoFocus: true,
+      autoFocus: this.props.autoFocus,
       placeholder: "Enter Address or Location",
       id: 'address'
     }
@@ -112,6 +112,7 @@ class AddressInput extends React.Component {
             autocompleteItem={AutocompleteItem}
             inputProps={inputProps}
             classNames={cssClasses}
+            autoFocus={this.props.autoFocus}
           />
             {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}
             {!this.state.loading && this.state.geocodeResults ?
@@ -191,6 +192,7 @@ class Home extends React.Component {
                 <AddressInput
                   id='origin'
                   onSubmit={this.handleFormSubmit}
+                  autoFocus={true}
                 />
               }
               {originAddress !== '' &&
@@ -212,6 +214,7 @@ class Home extends React.Component {
                 <AddressInput
                   id='destination'
                   onSubmit={this.handleFormSubmit}
+                  autoFocus={false}
                 />}
               {destinationAddress !== '' &&
                 <div><Maps
