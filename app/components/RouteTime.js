@@ -21,7 +21,7 @@ class RouteTime extends React.Component {
     matrix.getDistanceMatrix({
         origins: [origin],
         destinations: [destination],
-        travelMode: google.maps.TravelMode.DRIVING,
+        travelMode: google.maps.TravelMode.DRIVING
       }, 
       this.renderDetails.bind(this)
     );

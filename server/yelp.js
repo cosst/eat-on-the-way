@@ -10,8 +10,9 @@ function getYelpBusinesses (req, res) {
   client.search({
     categories: 'restaurants, All',
     location: address,
-    limit: 20,
+    limit: 25,
     sort_by: 'rating',
+    radius: 8046,
     open_now: true
   })
   .then(response => res.send(response))

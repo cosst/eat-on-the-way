@@ -142,10 +142,10 @@ class BusinessList extends React.Component {
 
   render() {
     return (
-      <div>
-        <button className='button' onClick={this.handleMostOnRouteSort}>Most On Route</button>
-        <button className='button' onClick={this.handleEatSoonSort}>Eat Soon</button>
-        <button className='button' onClick={this.handleBestRatingSort}>Best Rating</button>
+      <div className='sort-by-buttons'>
+        <button className='sort-button' onClick={this.handleMostOnRouteSort}>Most On Route</button>
+        <button className='sort-button' onClick={this.handleEatSoonSort}>Eat Soon</button>
+        <button className='sort-button' onClick={this.handleBestRatingSort}>Best Rating</button>
         <ul className='biz-list'>
           {this.state.businesses.map(function (business, originAddress, destinationAddress) {
             return (

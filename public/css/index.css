@@ -4,7 +4,6 @@ body {
 
 a {
     text-decoration: none;
-    color: #d0021b;
 }
 
 h1 {
@@ -119,6 +118,17 @@ ul {
     font-weight: bold;
 }
 
+.footer {
+    display: flex;
+    justify-content: center;
+}
+
+.footer li {
+    margin: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .header-container {
     text-align: center;
 }
@@ -144,6 +154,34 @@ li .left {
     display: flex;
     justify-content: space-around;
     flex-flow: row wrap;
+}
+
+.sort-by-buttons {
+    text-align: center;
+}
+
+.sort-button {
+    color: #fff;
+    background: #D32323;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 120px;
+    text-align: center;
+    display: inline-block;
+    padding: 7px 0;
+    margin: 10px 10px;
+    cursor: pointer;
+}
+
+.sort-button:hover:enabled {
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(1px);
+}
+
+.sort-button:active {
+    transform: translateY(1px);
 }
 
 .space-list-items {

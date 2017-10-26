@@ -11,6 +11,7 @@ var Home = require('./Home');
 var Header = require('./Header');
 var Results = require('./Results');
 var Maps = require('./Maps');
+var Footer = require('./Footer');
 
 class App extends React.Component {
   render() {
@@ -26,6 +27,7 @@ class App extends React.Component {
               return <p>Not Found</p>
             }} />
           </Switch>
+          <Footer scrollStepInPx="50" delayInMs="16.66" />
         </div>
       </BrowserRouter>
     )
