@@ -17,29 +17,6 @@ class Business extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   let matrix = new google.maps.DistanceMatrixService();
-  //   matrix.getDistanceMatrix(
-  //   {
-  //     origins: [this.props.originAddress, this.state.eatAddress],
-  //     destinations: [this.state.eatAddress, this.props.destinationAddress],
-  //     travelMode: google.maps.TravelMode.DRIVING,
-  //   },
-  //   this.setAdditionalTime.bind(this));
-  // }
-
-  // setAdditionalTime(response, status) {
-  //   if (status == 'OK') {
-  //     let additionalTime = (response.rows[1].elements[1].duration.value + response.rows[0].elements[0].duration.value) - response.rows[0].elements[1].duration.value;
-  //     let arriveTimeValue = response.rows[0].elements[0].duration.value;
-  //     let arriveTimeText = response.rows[0].elements[0].duration.text;
-
-  //     this.setState({
-  //       business: Object.assign({}, this.state.business, {additionalTime: additionalTime, arriveTimeValue: arriveTimeValue, arriveTimeText: arriveTimeText})
-  //     });
-  //   }
-  // }
-
   render() {
   var additionalTime = this.props.business.additionalTime;
   var arriveTimeValue = this.props.business.arriveTimeValue;
@@ -102,15 +79,17 @@ class BusinessList extends React.Component {
       originAddress: props.originAddress,
       destinationAddress: props.destinationAddress
     };
-    // this.setAdditionalTime = this.setAdditionalTime.bind(this);
+      this.handleMostOnRouteSort = this.handleMostOnRouteSort.bind(this);
+      this.handleEatSoonSort = this.handleEatSoonSort.bind(this);
+      this.handleBestRatingSort = this.handleBestRatingSort.bind(this);
   }
 
   componentDidMount() {
     let matrix = new google.maps.DistanceMatrixService();
-    // console.log(this.state.businesses);
+
     this.state.businesses.map((business, index) => {
       var eatAddress = business.location.display_address.join(', ');
-      // console.log(eatAddress);
+
       matrix.getDistanceMatrix(
       {
         origins: [this.state.originAddress, eatAddress],
@@ -118,23 +97,17 @@ class BusinessList extends React.Component {
         travelMode: google.maps.TravelMode.DRIVING,
       },
       (response, status) => this.setAdditionalTime(response, status, index));
-      // console.log(response.rows[1].elements[1].duration.value);
-      // console.log(index);
     })
   }
 
   setAdditionalTime(response, status, index) {
     if (status == 'OK') {
-      // console.log(response);
-      // console.log(response.rows[1].elements[1].duration.value);
       let additionalTime = (response.rows[1].elements[1].duration.value + response.rows[0].elements[0].duration.value) - response.rows[0].elements[1].duration.value;
       let arriveTimeValue = response.rows[0].elements[0].duration.value;
       let arriveTimeText = response.rows[0].elements[0].duration.text;
-      // console.log(additionalTime);
+      
       let business = Object.assign({}, this.state.businesses[index], {additionalTime: additionalTime, arriveTimeValue: arriveTimeValue, arriveTimeText: arriveTimeText});
-      // business["additionalTime"] = "additionalTime";
-      // console.log(business);
-      // console.log(businesses);
+
       let newBusinesses = this.state.businesses.slice(0);
       newBusinesses[index] = business;
       this.setState({
@@ -143,24 +116,49 @@ class BusinessList extends React.Component {
     }    
   }
 
+  handleMostOnRouteSort(event) {
+    let newBusinesses = this.state.businesses.slice(0);
+    newBusinesses.sort((a,b) => a.additionalTime - b.additionalTime);
+    this.setState({
+      businesses: newBusinesses
+    });
+  }
+
+  handleEatSoonSort(event) {
+    let newBusinesses = this.state.businesses.slice(0);
+    newBusinesses.sort((a,b) => a.arriveTimeValue - b.arriveTimeValue);
+    this.setState({
+      businesses: newBusinesses
+    });
+  }
+
+  handleBestRatingSort(event) {
+    let newBusinesses = this.state.businesses.slice(0);
+    newBusinesses.sort((a,b) => b.rating - a.rating);
+    this.setState({
+      businesses: newBusinesses
+    });
+  }
+
   render() {
-    // var businesses = this.state.businesses;
-    // console.log(this.state.businesses);
-    // console.log(props.businesses);
-    // console.log(businesses);
     return (
-      <ul className='biz-list'>
-        {this.state.businesses.map(function (business, originAddress, destinationAddress) {
-          return (
-            <Business 
-              business={business}
-              originAddress={originAddress}
-              destinationAddress={destinationAddress}
-              key={business.id} 
-            />
-          );
-        })}
-      </ul>
+      <div>
+        <button className='button' onClick={this.handleMostOnRouteSort}>Most On Route</button>
+        <button className='button' onClick={this.handleEatSoonSort}>Eat Soon</button>
+        <button className='button' onClick={this.handleBestRatingSort}>Best Rating</button>
+        <ul className='biz-list'>
+          {this.state.businesses.map(function (business, originAddress, destinationAddress) {
+            return (
+              <Business 
+                business={business}
+                originAddress={originAddress}
+                destinationAddress={destinationAddress}
+                key={business.id} 
+              />
+            );
+          })}
+        </ul>
+      </div>
     )
   }
 }
