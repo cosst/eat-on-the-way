@@ -17,33 +17,33 @@ class Business extends React.Component {
     };
   }
 
-  componentDidMount() {
-    let matrix = new google.maps.DistanceMatrixService();
-    matrix.getDistanceMatrix(
-    {
-      origins: [this.props.originAddress, this.state.eatAddress],
-      destinations: [this.state.eatAddress, this.props.destinationAddress],
-      travelMode: google.maps.TravelMode.DRIVING,
-    },
-    this.setAdditionalTime.bind(this));
-  }
+  // componentDidMount() {
+  //   let matrix = new google.maps.DistanceMatrixService();
+  //   matrix.getDistanceMatrix(
+  //   {
+  //     origins: [this.props.originAddress, this.state.eatAddress],
+  //     destinations: [this.state.eatAddress, this.props.destinationAddress],
+  //     travelMode: google.maps.TravelMode.DRIVING,
+  //   },
+  //   this.setAdditionalTime.bind(this));
+  // }
 
-  setAdditionalTime(response, status) {
-    if (status == 'OK') {
-      let additionalTime = (response.rows[1].elements[1].duration.value + response.rows[0].elements[0].duration.value) - response.rows[0].elements[1].duration.value;
-      let arriveTimeValue = response.rows[0].elements[0].duration.value;
-      let arriveTimeText = response.rows[0].elements[0].duration.text;
+  // setAdditionalTime(response, status) {
+  //   if (status == 'OK') {
+  //     let additionalTime = (response.rows[1].elements[1].duration.value + response.rows[0].elements[0].duration.value) - response.rows[0].elements[1].duration.value;
+  //     let arriveTimeValue = response.rows[0].elements[0].duration.value;
+  //     let arriveTimeText = response.rows[0].elements[0].duration.text;
 
-      this.setState({
-        business: Object.assign({}, this.state.business, {additionalTime: additionalTime, arriveTimeValue: arriveTimeValue, arriveTimeText: arriveTimeText})
-      });
-    }
-  }
+  //     this.setState({
+  //       business: Object.assign({}, this.state.business, {additionalTime: additionalTime, arriveTimeValue: arriveTimeValue, arriveTimeText: arriveTimeText})
+  //     });
+  //   }
+  // }
 
   render() {
-  var additionalTime = this.state.business.additionalTime;
-  var arriveTimeValue = this.state.business.arriveTimeValue;
-  var arriveTimeText = this.state.business.arriveTimeText;
+  var additionalTime = this.props.business.additionalTime;
+  var arriveTimeValue = this.props.business.arriveTimeValue;
+  var arriveTimeText = this.props.business.arriveTimeText;
   var seconds = additionalTime;
   var hours = Math.floor(additionalTime/3600);
   var minutes = Math.floor((seconds - (hours*3600))/60);
@@ -61,10 +61,10 @@ class Business extends React.Component {
           <li className='left'>{this.state.eatAddress}</li>
           <li className='left'>Arrive in:
           {arriveTimeValue < 600
-            ? <span className='time-green'> {this.state.business.arriveTimeText}</span>
+            ? <span className='time-green'> {this.props.business.arriveTimeText}</span>
             : (arriveTimeValue < 1200
-              ? <span className='time-orange'> {this.state.business.arriveTimeText}</span>
-              : <span className='time-red'> {this.state.business.arriveTimeText}</span>
+              ? <span className='time-orange'> {this.props.business.arriveTimeText}</span>
+              : <span className='time-red'> {this.props.business.arriveTimeText}</span>
               )
           }
           </li>
@@ -94,21 +94,75 @@ class Business extends React.Component {
   }
 }
 
-function BusinessList (props) {
-  return (
-    <ul className='biz-list'>
-      {props.businesses.map(function (business) {
-        return (
-          <Business 
-            business={business}
-            originAddress={props.originAddress}
-            destinationAddress={props.destinationAddress}
-            key={business.id} 
-          />
-        );
-      })}
-    </ul>
-  )
+class BusinessList extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      businesses: props.businesses,
+      originAddress: props.originAddress,
+      destinationAddress: props.destinationAddress
+    };
+    // this.setAdditionalTime = this.setAdditionalTime.bind(this);
+  }
+
+  componentDidMount() {
+    let matrix = new google.maps.DistanceMatrixService();
+    // console.log(this.state.businesses);
+    this.state.businesses.map((business, index) => {
+      var eatAddress = business.location.display_address.join(', ');
+      // console.log(eatAddress);
+      matrix.getDistanceMatrix(
+      {
+        origins: [this.state.originAddress, eatAddress],
+        destinations: [eatAddress, this.state.destinationAddress],
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (response, status) => this.setAdditionalTime(response, status, index));
+      // console.log(response.rows[1].elements[1].duration.value);
+      // console.log(index);
+    })
+  }
+
+  setAdditionalTime(response, status, index) {
+    if (status == 'OK') {
+      // console.log(response);
+      // console.log(response.rows[1].elements[1].duration.value);
+      let additionalTime = (response.rows[1].elements[1].duration.value + response.rows[0].elements[0].duration.value) - response.rows[0].elements[1].duration.value;
+      let arriveTimeValue = response.rows[0].elements[0].duration.value;
+      let arriveTimeText = response.rows[0].elements[0].duration.text;
+      // console.log(additionalTime);
+      let business = Object.assign({}, this.state.businesses[index], {additionalTime: additionalTime, arriveTimeValue: arriveTimeValue, arriveTimeText: arriveTimeText});
+      // business["additionalTime"] = "additionalTime";
+      // console.log(business);
+      // console.log(businesses);
+      let newBusinesses = this.state.businesses.slice(0);
+      newBusinesses[index] = business;
+      this.setState({
+        businesses: newBusinesses
+      });
+    }    
+  }
+
+  render() {
+    // var businesses = this.state.businesses;
+    // console.log(this.state.businesses);
+    // console.log(props.businesses);
+    // console.log(businesses);
+    return (
+      <ul className='biz-list'>
+        {this.state.businesses.map(function (business, originAddress, destinationAddress) {
+          return (
+            <Business 
+              business={business}
+              originAddress={originAddress}
+              destinationAddress={destinationAddress}
+              key={business.id} 
+            />
+          );
+        })}
+      </ul>
+    )
+  }
 }
 
 BusinessList.propTypes = {
@@ -141,8 +195,8 @@ class Results extends React.Component {
           ? <Loading />
           : <BusinessList
               businesses={this.state.businesses}
-              originAddress={this.state.originAddress}
-              destinationAddress={this.state.destinationAddress}
+              originAddress={this.props.originAddress}
+              destinationAddress={this.props.destinationAddress}
             />}
       </div>
     )
