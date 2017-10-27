@@ -8,6 +8,36 @@ function getMiles (distanceInMeters) {
   return (distanceInMeters*0.000621371192).toFixed(1)
 }
 
+// display proper star image based on rating
+function starRating(state) {
+  // console.log(state);
+  switch(state) {
+    case 0:
+      return <img src="images/stars/small_0@2x.png" />;
+    case 1:
+      return <img src="images/stars/small_1@2x.png" />;
+    case 1.5:
+      return <img src="images/stars/small_1_half@2x.png" />;
+    case 2:
+      return <img src="images/stars/small_2@2x.png" />;
+    case 2.5:
+      return <img src="images/stars/small_2_half@2x.png" />;
+    case 3:
+      return <img src="images/stars/small_3@2x.png" />;
+    case 3.5:
+      return <img src="images/stars/small_3_half@2x.png" />;
+    case 4:
+      return <img src="images/stars/small_4@2x.png" />;
+    case 4.5:
+      return <img src="images/stars/small_4_half@2x.png" />;
+    case 5:
+      return <img src="images/stars/small_5@2x.png" />;
+    default:
+      return null;
+  }
+
+}
+
 class Business extends React.Component {
   constructor (props) {
     super(props);
@@ -34,9 +64,18 @@ class Business extends React.Component {
               src={this.state.business.image_url}
               alt={'Image for ' + this.state.business.name} />
           </li>
-          <li className='left'>{this.state.business.rating} stars | ({this.state.business.review_count} reviews)</li>
-          <li className='left'>{this.state.eatAddress}</li>
-          <li className='left'>Arrive in:
+          <li className='center'>
+            {starRating (this.state.business.rating)}
+            <a href={this.state.business.url} target='_blank'>
+              <img 
+                className='yelp-image'
+                src="images/logos/yelp_outline.png"
+              />
+            </a>
+          </li>
+          <li className='center review-count'>based on {this.state.business.review_count} reviews</li>
+          <li className='left yelp-address-result'>{this.state.eatAddress}</li>
+          <li className='left'>Arrive In:
           {arriveTimeValue < 600
             ? <span className='time-green'> {this.props.business.arriveTimeText}</span>
             : (arriveTimeValue < 1200
@@ -144,7 +183,7 @@ class BusinessList extends React.Component {
     return (
       <div className='sort-by-buttons'>
         <button className='sort-button' onClick={this.handleMostOnRouteSort}>Most On Route</button>
-        <button className='sort-button' onClick={this.handleEatSoonSort}>Eat Soon</button>
+        <button className='sort-button' onClick={this.handleEatSoonSort}>Eat ASAP</button>
         <button className='sort-button' onClick={this.handleBestRatingSort}>Best Rating</button>
         <ul className='biz-list'>
           {this.state.businesses.map(function (business, originAddress, destinationAddress) {
