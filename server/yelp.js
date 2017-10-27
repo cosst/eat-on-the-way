@@ -2,7 +2,7 @@ import express from 'express';
 
 var yelp = require('yelp-fusion');
 const app = express();
-const token  = 'zb1p8LlaSDttz_8TXaEenGYv5UEF8Z6VoenBSzT873EIdec7hvcqvemcwkrTqtvYAqUyodgrviFIDcu7nZ8h3XOJ7OeopEgkdM8Nb-lgtIOEglYVucHb1GTmZWceWXYx';
+const token  = process.env.YELP_TOKEN;
 const client = yelp.client(token);
 
 function getYelpBusinesses (req, res) {

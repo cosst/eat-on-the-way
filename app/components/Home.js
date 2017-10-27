@@ -82,7 +82,6 @@ class AddressInput extends React.Component {
       onChange: this.handleChange,
       // onBlur: () => { console.log('Blur event!'); },
       // onFocus: () => { console.log('Focused!'); },
-      // need to figure out how to just set autoFocus on first form input
       autoFocus: this.props.autoFocus,
       placeholder: "Enter Address or Location",
       id: 'address'

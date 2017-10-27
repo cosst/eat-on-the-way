@@ -27,7 +27,7 @@ class App extends React.Component {
               return <p>Not Found</p>
             }} />
           </Switch>
-          <Footer scrollStepInPx="50" delayInMs="16.66" />
+          <Footer scrollStepInPx="50" delayInMs="6.66" />
         </div>
       </BrowserRouter>
     )

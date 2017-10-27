@@ -1,4 +1,9 @@
+# dependencies
 node_modules
+
+# misc
 .DS_Store
 dist
 yarn-error.log
+.env
+.env.default
