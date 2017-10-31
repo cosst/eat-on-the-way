@@ -1,13 +1,15 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 
 const DotenvPlugin = require('webpack-dotenv-plugin');
 
-module.exports = {
+var config = {
   entry: './app/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -24,9 +26,21 @@ module.exports = {
   plugins: 
   [new HtmlWebpackPlugin({
     template: 'app/index.html'
-    })],
-  [new DotenvPlugin({
-    sample: './.env.default',
-    path: './.env'
     })]
+  // [new DotenvPlugin({
+  //   sample: './.env.default',
+  //   path: './.env'
+  //   })]
 }
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    })
+  )
+}
+
+module.exports = config;

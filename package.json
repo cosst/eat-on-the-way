@@ -4,11 +4,14 @@
   "description": "A little tool to see what's good to eat along a route",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node server/server.js"
+    "start": "babel-node server/server.js",
+    "build": "NODE_ENV='production' webpack -p",
+    "deploy": "yarn build && firebase deploy",
+    "firebase init": "firebase login && firebase-init"
   },
   "babel": {
     "presets": [
-      "es2015",
+      "env",
       "react"
     ],
     "env": {
@@ -40,7 +43,9 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.7",
+    "firebase-tools": "^3.13.1",
     "html-webpack-plugin": "^2.30.1",
     "open": "^0.0.5",
     "style-loader": "^0.19.0",
