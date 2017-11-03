@@ -85,17 +85,20 @@ class Business extends React.Component {
           }
           </li>
           <li className='left'>Additional Drive Time: 
-          {hours === 0 && minutes !== 0
-            ? (minutes < 10
-                ? <span className='time-green'> {minutes} mins</span>
-                : (minutes > 20
-                    ? <span className='time-red'> {minutes} mins</span>
-                    : <span className='time-orange'> {minutes} mins</span>
+          {additionalTime <= 0
+            ? <span className='time-green'> no time added</span>
+            : (hours === 0 && minutes !== 0
+                ? (minutes < 10
+                    ? <span className='time-green'> {minutes} mins</span>
+                    : (minutes > 20
+                        ? <span className='time-red'> {minutes} mins</span>
+                        : <span className='time-orange'> {minutes} mins</span>
+                      )
                   )
-              )
-            : (hours === 0 && minutes === 0
-                ? <span className='time-green'> no time added</span>
-                : <span className='time-red'> {hours} hrs {minutes} mins</span>
+                : (hours === 0 && minutes === 0
+                    ? <span className='time-green'> no time added</span>
+                    : <span className='time-red'> {hours} hrs {minutes} mins</span>
+                  )
               )
           }
           </li>
