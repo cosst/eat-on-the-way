@@ -25,10 +25,12 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use('/', _routes2.default);
 
-app.listen(port, function (error) {
-  if (error) {
-    console.log(error);
-  } else {
-    (0, _open2.default)('http://localhost:' + port);
-  }
-});
+// app.listen(port, function (error) {
+//   if(error) {
+//     console.log(error);
+//   } else {
+//     open(`http://localhost:${port}`)
+//   }
+// });
+
+app.listen(app.get("port"));

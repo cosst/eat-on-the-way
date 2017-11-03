@@ -12,10 +12,12 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use('/', routes);
 
-app.listen(port, function (error) {
-  if(error) {
-    console.log(error);
-  } else {
-    open(`http://localhost:${port}`)
-  }
-});
+// app.listen(port, function (error) {
+//   if(error) {
+//     console.log(error);
+//   } else {
+//     open(`http://localhost:${port}`)
+//   }
+// });
+
+app.listen(app.get("port"));
