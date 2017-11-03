@@ -4,10 +4,6 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
-var _open = require('open');
-
-var _open2 = _interopRequireDefault(_open);
-
 var _routes = require('./routes');
 
 var _routes2 = _interopRequireDefault(_routes);
@@ -15,6 +11,8 @@ var _routes2 = _interopRequireDefault(_routes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 require('dotenv').config();
+// import open from 'open';
+
 
 var port = 3000;
 var app = (0, _express2.default)();

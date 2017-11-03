@@ -1,5 +1,5 @@
 import express from 'express';
-import open from 'open';
+// import open from 'open';
 import routes from './routes';
 require('dotenv').config();
 
