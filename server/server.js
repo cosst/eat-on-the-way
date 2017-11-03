@@ -1,7 +1,7 @@
 import express from 'express';
 // import open from 'open';
 import routes from './routes';
-require('dotenv').config();
+// require('dotenv').config();
 
 const port = 3000;
 const app = express();

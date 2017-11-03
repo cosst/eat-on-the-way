@@ -10,11 +10,11 @@ var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-require('dotenv').config();
-// import open from 'open';
-
+// require('dotenv').config();
 
 var port = 3000;
+// import open from 'open';
+
 var app = (0, _express2.default)();
 
 if (process.env.NODE_ENV === 'production') {
