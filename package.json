@@ -4,9 +4,9 @@
   "description": "A little tool to see what's good to eat along a route",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node server/server.js",
+    "start": "babel-node server.js",
     "build": "NODE_ENV='production' webpack -p",
-    "server": "node server.js",
+    "server": "babel-node server.js",
     "deploy": "yarn build && firebase deploy",
     "firebase init": "firebase login && firebase-init"
   },
