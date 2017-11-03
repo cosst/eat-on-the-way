@@ -8,14 +8,6 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-var _webpackConfig = require('../webpack.config.dev');
-
-var _webpackConfig2 = _interopRequireDefault(_webpackConfig);
-
-var _webpack = require('webpack');
-
-var _webpack2 = _interopRequireDefault(_webpack);
-
 var _yelp = require('./yelp');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -23,8 +15,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var express = require('express');
 var app = express();
 var router = express.Router();
-var compiler = (0, _webpack2.default)(_webpackConfig2.default);
+// const compiler = webpack(config);
 var projectRoot = _path2.default.resolve(__dirname, '../');
+// import config from '../webpack.config.dev';
+// import webpack from 'webpack';
+
 
 // solving for CORS
 app.use(function (req, res, next) {
@@ -34,10 +29,10 @@ app.use(function (req, res, next) {
 });
 
 // webpack dev middleware
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: _webpackConfig2.default.output.publicPath
-}));
+// app.use(require('webpack-dev-middleware')(compiler, {
+//   noInfo: true,
+//   publicPath: config.output.publicPath
+// }));
 
 // serve static assets
 app.use(express.static(projectRoot + '/public'));

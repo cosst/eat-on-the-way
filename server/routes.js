@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-const compiler = webpack(config);
+// const compiler = webpack(config);
 const projectRoot = path.resolve(__dirname, '../');
 
 import path from 'path';
-import config from '../webpack.config.dev';
-import webpack from 'webpack';
+// import config from '../webpack.config.dev';
+// import webpack from 'webpack';
 import { getYelpBusinesses } from './yelp';
 
 // solving for CORS
@@ -17,10 +17,10 @@ app.use(function(req, res, next) {
 });
 
 // webpack dev middleware
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
+// app.use(require('webpack-dev-middleware')(compiler, {
+//   noInfo: true,
+//   publicPath: config.output.publicPath
+// }));
 
 // serve static assets
 app.use(express.static(projectRoot + '/public'));
