@@ -1,7 +1,7 @@
 {
   "name": "eat-on-the-way",
   "version": "1.0.0",
-  "description": "A little tool to see what's good to eat along a route",
+  "description": "A little tool to see what's good to eat along your route",
   "main": "index.js",
   "scripts": {
     "start": "babel-node server.js",
