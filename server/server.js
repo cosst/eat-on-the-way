@@ -3,7 +3,7 @@ import express from 'express';
 import routes from './routes';
 // require('dotenv').config();
 
-const port = 3000;
+// const port = 3000;
 const app = express();
 
 if (process.env.NODE_ENV === 'production') {
@@ -20,4 +20,5 @@ app.use('/', routes);
 //   }
 // });
 
-app.listen(app.get("port"));
+app.listen(process.env.PORT || 3000);
+
