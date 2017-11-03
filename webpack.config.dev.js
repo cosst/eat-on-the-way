@@ -25,7 +25,8 @@ export default {
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader'] },
-      { test: /\.png$/, loader: "url-loader?mimetype=image/png" }
+      { test: /\.png$/, loader: "url-loader?mimetype=image/png" },
+      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ]}
     ]
   },
   plugins:

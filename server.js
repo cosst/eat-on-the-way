@@ -6,6 +6,10 @@ require('dotenv').config();
 const port = 3000;
 const app = express();
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('dist'));
+}
+
 app.use('/', routes);
 
 app.listen(port, function (error) {
