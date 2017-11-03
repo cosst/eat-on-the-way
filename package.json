@@ -6,6 +6,7 @@
   "scripts": {
     "start": "babel-node server/server.js",
     "build": "NODE_ENV='production' webpack -p",
+    "server": "node server.js",
     "deploy": "yarn build && firebase deploy",
     "firebase init": "firebase login && firebase-init"
   },
