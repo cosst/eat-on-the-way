@@ -11,8 +11,8 @@ module.exports = {
       console.log(error);
     });
   },
-  getBusinesses: function (address) {
-    return axios.get('/cafes', {params: {address: address}})
+  getBusinesses: function (latitude, longitude, radius) {
+    return axios.get('/cafes', {params: {latitude: latitude, longitude: longitude, radius: radius}})
     .then(function (response) {
       return response.data.jsonBody.businesses;
       // // take business variable here and use it to make api calls for each business to determine arrival time and additional time

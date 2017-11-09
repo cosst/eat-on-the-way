@@ -183,6 +183,36 @@ class Home extends React.Component {
     var destinationLng = this.state.destinationLng;
     var showResults = this.state.showResults;
 
+// find midpoint between origin and destination for Yelp search
+    var originLatRad = originLat * (Math.PI/180);
+    var originLngRad = originLng * (Math.PI/180);
+    var destinationLatRad = destinationLat * (Math.PI/180);
+    var destinationLngRad = destinationLng * (Math.PI/180);
+    var Bx = Math.cos(destinationLatRad) * Math.cos(destinationLngRad - originLngRad);
+    var By = Math.cos(destinationLatRad) * Math.sin(destinationLngRad - originLngRad);
+    var yelpSearchLatRad = Math.atan2(Math.sin(originLatRad) + Math.sin(destinationLatRad),
+              Math.sqrt( (Math.cos(originLatRad)+Bx)*(Math.cos(originLatRad)+Bx) + By*By ) );
+    var yelpSearchLngRad = originLngRad + Math.atan2(By, Math.cos(originLatRad) + Bx);
+    var yelpSearchLat = (yelpSearchLatRad / (Math.PI/180)).toFixed(6);
+    var yelpSearchLng = (yelpSearchLngRad / (Math.PI/180)).toFixed(6);
+
+// calculate distance between origin and destination to pass to Yelp search for radius
+    var R = 6371e3; // metres
+    var φ1 = originLat * (Math.PI/180);
+    var φ2 = destinationLat * (Math.PI/180);
+    var Olong = originLng * (Math.PI/180);
+    var Dlong = destinationLng * (Math.PI/180);
+    var Δφ = (destinationLat - originLat) * (Math.PI/180);
+    var Δλ = (destinationLng - originLng) * (Math.PI/180);
+
+    var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+            Math.cos(φ1) * Math.cos(φ2) *
+            Math.sin(Δλ/2) * Math.sin(Δλ/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    var distance = R * c;
+    var yelpSearchRadius = distance/1.8;
+
     return (
         <div><div className='row'>
           <div className='address-input'>
@@ -236,6 +266,22 @@ class Home extends React.Component {
                />
             </div>
           }
+          {originAddress && destinationAddress &&
+            <div className='drive-time'>
+              <ul>
+                <li>originLat: {originLat}</li>
+                <li>originLng: {originLng}</li>
+                <li>destinationLat: {destinationLat}</li>
+                <li>destinationLng: {destinationLng}</li>
+                <li>originLatRad: {originLatRad}</li>
+                <li>Bx: {Bx}</li>
+                <li>By: {By}</li>
+                <li>yelpSearchLatRad: {yelpSearchLatRad}</li>
+                <li>yelpSearchLngRad: {yelpSearchLngRad}</li>
+                <li>yelpSearchCoords: {yelpSearchLat}, {yelpSearchLng}</li>
+              </ul>
+            </div>
+          }
           {showResults === false && originAddress && destinationAddress &&
             <button
               className='button'
@@ -250,6 +296,9 @@ class Home extends React.Component {
             <Results
               originAddress={this.state.originAddress}
               destinationAddress={this.state.destinationAddress}
+              yelpSearchLat={yelpSearchLat}
+              yelpSearchLng={yelpSearchLng}
+              yelpSearchRadius={yelpSearchRadius}
             />
           }
         </div></div>

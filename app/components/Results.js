@@ -215,11 +215,13 @@ class Results extends React.Component {
     this.state = {
       originAddress: props.originAddress,
       destinationAddress: props.destinationAddress,
+      yelpSearchLat: props.yelpSearchLat,
+      yelpSearchLng: props.yelpSearchLng,
       businesses: null
     };
   }
   componentDidMount () {
-    api.getBusinesses(this.props.originAddress)
+    api.getBusinesses(this.props.yelpSearchLat, this.props.yelpSearchLng)
       .then(function (businesses) {
         this.setState(function () {
           return {

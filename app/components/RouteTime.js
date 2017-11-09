@@ -1,5 +1,5 @@
 import React from 'react';
-import api from '../utils/api';
+// import api from '../utils/api';
 
 class RouteTime extends React.Component {
   constructor(props) {
@@ -7,7 +7,8 @@ class RouteTime extends React.Component {
     this.state = {
       origin: this.props.origin,
       destination: this.props.destination,
-      duration: ''
+      duration: '',
+      distance: null
     };
   }
 
@@ -28,12 +29,13 @@ class RouteTime extends React.Component {
   }
   
   renderDetails(res, status) {
-    // If the request was successfull, fill our state with the distance data.
+    // If the request was successful, fill our state with the distance data.
     if (status == 'OK') {
       this.setState({
         origin: res.originAddresses[0],
         destination: res.destinationAddresses[0],
-        duration: res.rows[0].elements[0].duration.text
+        duration: res.rows[0].elements[0].duration.text,
+        distance: res.rows[0].elements[0].distance.value
       });
     } else {
       console.log(status);
@@ -42,7 +44,7 @@ class RouteTime extends React.Component {
 
   render() {
     return(
-        <span>{this.state.duration}</span>
+        <span>{this.state.distance} in {this.state.duration}</span>
     );
   }
 }

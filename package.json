@@ -4,12 +4,10 @@
   "description": "A little tool to see what's good to eat along your route",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node server.js",
+    "start": "babel-node server/server.js",
     "build": "NODE_ENV='production' webpack -p",
     "build2": "babel server -d dist-server --presets es2015,stage-2",
-    "server": "node dist-server/server.js",
-    "deploy": "yarn build && firebase deploy",
-    "firebase init": "firebase login && firebase-init"
+    "server": "node dist-server/server.js"
   },
   "babel": {
     "presets": [
