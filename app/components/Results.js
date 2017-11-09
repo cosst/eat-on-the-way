@@ -48,12 +48,16 @@ class Business extends React.Component {
   }
 
   render() {
+// calculations for drive time
   var additionalTime = this.props.business.additionalTime;
   var arriveTimeValue = this.props.business.arriveTimeValue;
   var arriveTimeText = this.props.business.arriveTimeText;
   var seconds = additionalTime;
   var hours = Math.floor(additionalTime/3600);
   var minutes = Math.floor((seconds - (hours*3600))/60);
+
+// setting address variables for Google Maps link
+  var address = this.state.eatAddress;
     return (
       <li className='biz-item'>
         <div className='biz-name'>{this.state.business.name}</div>
@@ -74,7 +78,21 @@ class Business extends React.Component {
             </a>
           </li>
           <li className='center review-count'>based on {this.state.business.review_count} reviews</li>
-          <li className='left yelp-address-result'>{this.state.eatAddress}</li>
+          <li className='left yelp-address-result'>
+            <div className='biz-address-container'>
+                            <div className='biz-address'>
+                {this.state.eatAddress}
+              </div>
+              <div className='biz-address'>
+                <a href={'https://www.google.com/maps/dir/?api=1&destination=' + address} target='_blank'>
+                    <img 
+                      className='google-map-image'
+                      src="images/logos/google_maps.png"
+                    />
+                </a>
+              </div>
+            </div>
+          </li>
           <li className='left'>Arrive In:
           {arriveTimeValue < 600
             ? <span className='time-green'> {this.props.business.arriveTimeText}</span>
@@ -103,9 +121,10 @@ class Business extends React.Component {
           }
           </li>
           <li className='left'>Distance: {getMiles (this.state.business.distance)} mi</li>
-          <li><a className='button' href={this.state.business.url} target='_blank'>
-                    View On Yelp
-              </a>
+          <li>
+            <a className='yelp-button' href={this.state.business.url} target='_blank'>
+                  View On Yelp
+            </a>
           </li>
         </ul>
       </li>

@@ -1,5 +1,4 @@
 import React from 'react';
-// import api from '../utils/api';
 
 class RouteTime extends React.Component {
   constructor(props) {
@@ -44,7 +43,7 @@ class RouteTime extends React.Component {
 
   render() {
     return(
-        <span>{this.state.distance} in {this.state.duration}</span>
+        <span>{this.state.duration}</span>
     );
   }
 }

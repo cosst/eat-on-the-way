@@ -104,24 +104,26 @@ class AddressInput extends React.Component {
       </div>)
 
     return (
-      <form onSubmit={this.handleFormSubmit} className='form'>
-        <div>
-          <PlacesAutocomplete
-            onSelect={this.handleSelect}
-            autocompleteItem={AutocompleteItem}
-            inputProps={inputProps}
-            classNames={cssClasses}
-            autoFocus={this.props.autoFocus}
-          />
-            {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}
-            {!this.state.loading && this.state.geocodeResults ?
-              <div className='geocoding-results'>{this.state.geocodeResults}</div> :
-            null}
-            {!this.state.loading && this.state.geocodeResults &&
-          <button type="submit" className='button' disabled={!this.state.address}>Confirm</button>
-            }
-        </div>
-      </form>
+      <div className='form-div'>
+        <form onSubmit={this.handleFormSubmit} className='form'>
+          <div className='autocomplete-div'>
+            <PlacesAutocomplete
+              onSelect={this.handleSelect}
+              autocompleteItem={AutocompleteItem}
+              inputProps={inputProps}
+              classNames={cssClasses}
+              autoFocus={this.props.autoFocus}
+            />
+              {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}
+              {!this.state.loading && this.state.geocodeResults ?
+                <div className='geocoding-results'>{this.state.geocodeResults}</div> :
+              null}
+              {!this.state.loading && this.state.geocodeResults &&
+            <button type="submit" className='button' disabled={!this.state.address}>Confirm</button>
+              }
+          </div>
+        </form>
+      </div>
     )
   }
 }
@@ -197,7 +199,7 @@ class Home extends React.Component {
     var yelpSearchLng = (yelpSearchLngRad / (Math.PI/180)).toFixed(6);
 
 // calculate distance between origin and destination to pass to Yelp search for radius
-    var R = 6371e3; // metres
+    var R = 6371e3;
     var φ1 = originLat * (Math.PI/180);
     var φ2 = destinationLat * (Math.PI/180);
     var Olong = originLng * (Math.PI/180);
@@ -264,22 +266,6 @@ class Home extends React.Component {
                 origin={this.state.originAddress}
                 destination={this.state.destinationAddress}
                />
-            </div>
-          }
-          {originAddress && destinationAddress &&
-            <div className='drive-time'>
-              <ul>
-                <li>originLat: {originLat}</li>
-                <li>originLng: {originLng}</li>
-                <li>destinationLat: {destinationLat}</li>
-                <li>destinationLng: {destinationLng}</li>
-                <li>originLatRad: {originLatRad}</li>
-                <li>Bx: {Bx}</li>
-                <li>By: {By}</li>
-                <li>yelpSearchLatRad: {yelpSearchLatRad}</li>
-                <li>yelpSearchLngRad: {yelpSearchLngRad}</li>
-                <li>yelpSearchCoords: {yelpSearchLat}, {yelpSearchLng}</li>
-              </ul>
             </div>
           }
           {showResults === false && originAddress && destinationAddress &&

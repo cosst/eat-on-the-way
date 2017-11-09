@@ -9,6 +9,8 @@ a {
 h1 {
     color: #D32323;
     font-size: 40px;
+    margin: 20px 0px 0px 0px;
+
 }
 
     @media only screen 
@@ -20,6 +22,13 @@ h1 {
 h4 {
     font-size: 16px;
 }
+
+    @media only screen 
+        and (max-width: 460px) {
+            h4 {
+                margin: 5px 0px 5px 0px;
+            }
+        }
 
 li {
     list-style-type: none;
@@ -34,15 +43,25 @@ ul {
 }
 
 .address-input {
-    align-items: center;
-    display: flex;
+/*    align-items: center;
+*/    display: flex;
     flex-direction: column;
+    flex-grow: 1;
     height: 380px;
+    text-align: center;
     width: 50%;
 }
 
+/*    @media only screen 
+        and (max-device-width: 650px) {
+            .address-input {
+                height: 100%;
+                width: 100%;
+            }
+        }*/
+
     @media only screen 
-        and (max-width: 650px) {
+        and (max-width: 800px) {
             .address-input {
                 height: 100%;
                 width: 100%;
@@ -62,6 +81,10 @@ ul {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+.autocomplete-div {
+    text-align: center;
+}
+
 .autocomplete-item {
 
 }
@@ -69,6 +92,26 @@ ul {
 .autocomplete-item-active {
     background: #e5e5e5;
 }
+
+.biz-address {
+    display: inline-flex;
+    font-weight: bold;
+    padding: 0px 0px 0px 0px;
+}
+
+.biz-address-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+    @media only screen 
+        and (max-width: 460px) {
+            .biz-address-container {
+                margin: 0px 0px 10px 0px;
+            }
+        }
 
 .biz-image {
     border-radius: 15%;
@@ -156,7 +199,14 @@ ul {
 }
 
 .form {
-    width: 80%;
+    display: inline-block;
+    width: 90%;
+}
+
+.form-div {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
 }
 
 .form-group {
@@ -170,12 +220,23 @@ ul {
     border: honeydew;
     border-radius: 2px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-    display: block;
+    display: inline-block;
     font-size: 20px;
     outline: none;
     padding: 16px;
-    width: 100%;
+    width: 90%;
+    overflow: hidden;
 }
+
+    @media only screen 
+        and (max-width: 460px) {
+            .form-control,
+            .form-control:focus,
+            .form-control:active {
+                font-size: 16px;
+                width: 88%;
+            }
+        }
 
 .google-logo-container {
     background: #fcfcfc;
@@ -186,12 +247,35 @@ ul {
     height: 80%;
 }
 
+.google-map-image {
+    height: 35px;
+    padding-left: 10px;
+}
+
 .header-container {
     text-align: center;
 }
 
+.header-tagline {
+    display: inline-block;
+    text-align: center;
+    width: 80%;
+}
+
+    @media only screen 
+        and (max-width: 460px) {
+            .header-tagline {
+                font-size: 12px;
+                width: 90%;
+            }
+        }
+
 .home-container {
     display: flex;
+}
+
+.italics {
+    font-style: italic;
 }
 
 li .center {
@@ -230,7 +314,7 @@ li .left {
 .row {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .sort-button {
@@ -282,6 +366,35 @@ li .left {
 
 .yelp-address-result {
     margin-top: 10px;
+}
+
+.yelp-button {
+    background: #D32323;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px auto;
+    padding: 7px 0;
+    text-align: center;
+    width: 120px;
+}
+
+.yelp-button:hover:enabled {
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(1px);
+}
+
+.yelp-button:active {
+    transform: translateY(1px);
+}
+
+.yelp-button:disabled {
+    background: lightgrey;
+    cursor: default;
 }
 
 .yelp-image {

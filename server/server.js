@@ -1,7 +1,7 @@
 import express from 'express';
 import open from 'open';
 import routes from './routes';
-require('dotenv').config();
+// require('dotenv').config();
 
 // const port = 3000;
 const app = express();
@@ -14,6 +14,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/', routes);
 
 if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
   const port = 3000;
   app.listen(port, function (error) {
     if(error) {
