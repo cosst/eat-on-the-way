@@ -2,7 +2,11 @@
 
 A tool to see what's good to eat along your route and how much time it will add to your trip. Makes use of the Yelp Fusion & Google Maps Distance Matrix APIs.
 
-## Getting Started
+## See It Live
+
+[Eat on the Way](https://eat-on-the-way-21.herokuapp.com/), a working title.
+
+## Local Installation
 
 1. Install [Node](https://nodejs.org/en/) if you don't already have it installed. Version 6+ required to run the app.
 2. Install [yarn](https://yarnpkg.com/en/).
