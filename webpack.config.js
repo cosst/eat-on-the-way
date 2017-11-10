@@ -2,7 +2,9 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
 
-const DotenvPlugin = require('webpack-dotenv-plugin');
+if (process.env.NODE_ENV !== 'production') {
+  const DotenvPlugin = require('webpack-dotenv-plugin');
+}
 
 var config = {
   entry: './app/index.js',
