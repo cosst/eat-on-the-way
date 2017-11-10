@@ -6,13 +6,11 @@ const token  = process.env.YELP_TOKEN;
 const client = yelp.client(token);
 
 function getYelpBusinesses (req, res) {
-  // var address = req.query.address;
   var latitude = req.query.latitude;
   var longitude = req.query.longitude;
   var radius = req.query.radius;
   client.search({
     categories: 'restaurants, All',
-    // location: address,
     latitude: latitude,
     longitude: longitude,
     limit: 25,
