@@ -79,6 +79,8 @@ ul {
     border-right: honeydew;
     border-top: 1px solid #e6e6e6;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 90%;
 }
 
 .autocomplete-div {
