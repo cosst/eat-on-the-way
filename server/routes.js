@@ -10,9 +10,9 @@ import configdev from '../webpack.configdev';
 import webpack from 'webpack';
 import { getYelpBusinesses } from './yelp';
 
-if (process.env.NODE_ENV !== 'production') {
-  const compiler = webpack(configdev);
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   const compiler = webpack(configdev);
+// }
 
 if (process.env.NODE_ENV === 'production') {
   const compiler = webpack(config);

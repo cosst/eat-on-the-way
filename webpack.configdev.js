@@ -27,10 +27,12 @@ var configdev = {
   [new HtmlWebpackPlugin({
     template: 'app/index.html'
     })]
-  [new DotenvPlugin({
-    sample: './.env.default',
-    path: './.env'
-    })]
+  // if (process.env.NODE_ENV === 'production') {
+    [new DotenvPlugin({
+      sample: './.env.default',
+      path: './.env'
+      })]
+  // }
 }
 
 if (process.env.NODE_ENV === 'production') {
