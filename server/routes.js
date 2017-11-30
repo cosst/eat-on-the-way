@@ -6,7 +6,7 @@ const projectRoot = path.resolve(__dirname, '../');
 
 import path from 'path';
 import config from '../webpack.config';
-import configdev from '../webpack.configdev';
+// import configdev from '../webpack.configdev';
 import webpack from 'webpack';
 import { getYelpBusinesses } from './yelp';
 
@@ -14,9 +14,9 @@ import { getYelpBusinesses } from './yelp';
 //   const compiler = webpack(configdev);
 // }
 
-if (process.env.NODE_ENV === 'production') {
+// if (process.env.NODE_ENV === 'production') {
   const compiler = webpack(config);
-}
+// }
 
 // solving for CORS
 app.use(function(req, res, next) {
