@@ -2,7 +2,7 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
 
-const DotenvPlugin = require('webpack-dotenv-plugin');
+// const DotenvPlugin = require('webpack-dotenv-plugin');
 
 var config = {
   entry: [
