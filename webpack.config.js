@@ -5,9 +5,7 @@ var webpack = require('webpack');
 // const DotenvPlugin = require('webpack-dotenv-plugin');
 
 var config = {
-  entry: [
-    path.resolve(__dirname, 'app/index.js') 
-  ],
+  entry: './app/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
