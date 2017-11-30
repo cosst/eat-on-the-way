@@ -10,7 +10,6 @@ function getMiles (distanceInMeters) {
 
 // display proper star image based on rating
 function starRating(state) {
-  // console.log(state);
   switch(state) {
     case 0:
       return <img src="images/stars/small_0@2x.png" />;

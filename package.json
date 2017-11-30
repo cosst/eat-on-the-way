@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node server/server.js",
-    "build": "NODE_ENV='production' webpack -p",
-    "build2": "babel server -d dist-server --presets es2015,stage-2",
+    "build": "NODE_ENV='production' webpack -p && babel server -d dist-server --presets es2015,stage-2",
     "server": "node dist-server/server.js"
   },
   "babel": {

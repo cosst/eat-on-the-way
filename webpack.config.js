@@ -2,15 +2,17 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
 
-if (process.env.NODE_ENV !== 'production') {
+// if (process.env.NODE_ENV !== 'production') {
   const DotenvPlugin = require('webpack-dotenv-plugin');
-}
+// }
 
 var config = {
-  entry: './app/index.js',
+  entry: [
+    path.resolve(__dirname, 'app/index.js') 
+  ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index_bundle.js',
+    filename: 'bundle.js',
     publicPath: '/'
   },
   module: {
@@ -29,10 +31,10 @@ var config = {
   [new HtmlWebpackPlugin({
     template: 'app/index.html'
     })]
-  // [new DotenvPlugin({
-  //   sample: './.env.default',
-  //   path: './.env'
-  //   })]
+  [new DotenvPlugin({
+    sample: './.env.default',
+    path: './.env'
+    })]
 }
 
 if (process.env.NODE_ENV === 'production') {

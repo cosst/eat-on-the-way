@@ -5,7 +5,7 @@ const compiler = webpack(config);
 const projectRoot = path.resolve(__dirname, '../');
 
 import path from 'path';
-import config from '../webpack.config.dev';
+import config from '../webpack.config';
 import webpack from 'webpack';
 import { getYelpBusinesses } from './yelp';
 
