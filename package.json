@@ -23,6 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.16.2",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
@@ -48,7 +49,6 @@
     "yelp-fusion": "^1.0.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "open": "^0.0.5",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.9.1"
