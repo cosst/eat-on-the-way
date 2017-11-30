@@ -1,22 +1,13 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-// const compiler = webpack(configdev);
+const compiler = webpack(config);
 const projectRoot = path.resolve(__dirname, '../');
 
 import path from 'path';
 import config from '../webpack.config';
-// import configdev from '../webpack.configdev';
 import webpack from 'webpack';
 import { getYelpBusinesses } from './yelp';
-
-// if (process.env.NODE_ENV !== 'production') {
-//   const compiler = webpack(configdev);
-// }
-
-// if (process.env.NODE_ENV === 'production') {
-  const compiler = webpack(config);
-// }
 
 // solving for CORS
 app.use(function(req, res, next) {
