@@ -4,7 +4,7 @@ import routes from './routes';
 const app = express();
 
 if (process.env.NODE_ENV === 'production') {
-  app.listen(process.env.PORT || 3000);
+  app.listen(process.env.PORT);
   app.use(express.static('dist'));
 }
 
