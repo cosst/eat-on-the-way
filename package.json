@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node server/server.js",
-    "build": "NODE_ENV='production' webpack -p --config ./webpack.config.js && babel server -d dist-server --presets es2015,stage-2",
+    "build": "NODE_ENV='production' webpack -p && babel server -d dist-server --presets es2015,stage-2",
     "server": "node dist-server/server.js"
   },
   "babel": {
@@ -52,8 +52,5 @@
     "open": "^0.0.5",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.9.1"
-  },
-  "engines": {
-    "node": "6.11.2"
   }
 }
