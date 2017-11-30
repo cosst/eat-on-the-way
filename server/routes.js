@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-const compiler = webpack(config);
+const compiler = webpack(configdev);
 const projectRoot = path.resolve(__dirname, '../');
 
 import path from 'path';
-import config from '../webpack.configdev';
+import config from '../webpack.config';
+import configdev from '../webpack.configdev';
 import webpack from 'webpack';
 import { getYelpBusinesses } from './yelp';
 

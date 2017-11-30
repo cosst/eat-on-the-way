@@ -4,7 +4,7 @@ var webpack = require('webpack');
 
 const DotenvPlugin = require('webpack-dotenv-plugin');
 
-var config = {
+var configdev = {
   entry: './app/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -43,4 +43,4 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 
-module.exports = config;
+module.exports = configdev;
